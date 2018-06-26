@@ -1,7 +1,7 @@
 {
-    "name": "photopick",
+    "name": "translate",
     "version": "0.0.1",
-    "description": "A gallery and online shop solution for professional photographers",
+    "description": "Translator Page",
     "main": "index.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
       "handlebars",
       "expressjs"
     ],
-    "author": "Robert Möstl",
+    "author": "Georg Wresnik",
     "license": "GPL-2.0",
     "dependencies": {
       "body-parser": "^1.18.2",
@@ -19,7 +19,8 @@
       "express": "^4.16.2",
       "express-session": "^1.15.6",
       "handlebars": "^4.0.11",
-      "amqplib" : "^0.5.2"
+      "amqplib" : "^0.5.2",
+      "formidable": "^1.0.17"
     }
   }
   
