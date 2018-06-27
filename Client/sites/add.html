@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>RIA | Project</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <meta name="author" content="Wachter, Tomek, Wresnik, Wallner">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div class="bgimg display-container text-white">
+    <div class="display-middle xlarge">
+      <h1>Add a new word</h1>
+
+      <br>
+      <div>
+        german:
+        <br/>
+        <input name="german" id="german">
+        <br/>
+        <br/> english:
+        <br/>
+        <input name="english" id="english">
+        <br/>
+        <br/>
+        <input type="button" value="add" onclick="addWord()" class="button brown">
+      </div>
+      <div id="done"></div>
+    </div>
+    <div class="display-topleft container xxlarge">
+      <form action="/" method="get" target="_self" class="form">
+        <button class="button brown">back</button>
+      </form>
+    </div>
+  </div>
+  <script src="/sites/scripts.js"></script>
+</body>
+
+</html>

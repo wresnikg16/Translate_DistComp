@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>RIA | Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <meta name="author" content="Wachter, Tomek, Wresnik, Wallner">
+    <link rel="stylesheet" type="text/css" href="sites/style.css">
+    <script src="/sites/scripts.js"></script>
+</head>
+
+<body>
+    <div class="bgimg display-container text-white">
+        <div class="display-middle jumbo">
+            <p>SWDictionary</p>
+        </div>
+        <div class="display-topleft container xxlarge">
+            <form action="sites/remove.html" method="get" target="_self" class="form">
+                <button class="button brown">dictionary</button>
+            </form>
+            <form action="sites/add.html" method="get" target="_self" class="form">
+                <button class="button brown">new word</button>
+            </form>
+            <form action="sites/search.html" method="get" target="_self" class="form">
+                <button class="button brown">search</button>
+            </form>
+        </div>
+        <div class="display-bottomleft container xxlarge">
+            <p>DistComp Project</p>
+            <p>Christine Tomek, Georg Wresnik, Marcus Wallner</p>
+        </div>
+    </div>
+    <footer>
+            <p class="display-bottomright">
+                <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:88px;height:31px"
+                         src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                         alt="CSS ist valide!" />
+                </a>
+                <p id="geo"></p>
+                <script>window.onload=getLocation()</script>
+            </p>
+    </footer>
+</body>
+</html>

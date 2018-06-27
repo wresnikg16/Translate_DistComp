@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>RIA | Project</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <meta name="author" content="Wachter, Tomek, Wresnik, Wallner">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload="loadJson()">
+  <div class="bgimg display-container text-white">
+    <div class="display-middle xlarge">
+      <h1>SWDictionary</h1>
+      <div id="all">
+        <script src="/sites/scripts.js"></script>
+      </div>
+      <h2>Delete Entry</h2>
+        Name:
+        <br>
+        <input name="name" id="name">
+        <br>
+      <button type="button" onclick="removeWord()" class="button brown">Delete</button>
+      <div id="removed"></div>
+    </div>
+    <div class="display-topleft container xxlarge">
+      <form action="/" method="get" target="_self"class="form">
+        <button class="button brown">back</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
