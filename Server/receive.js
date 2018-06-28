@@ -21,7 +21,7 @@ function init() {
     if (err) {
       return console.error(err.message);
     }
-    console.log('Connected to the SQlite db.');
+    //console.log('Connected to the SQlite db.');
   });
   db.getAsync = function (sql) {
     var that = this;
@@ -74,9 +74,9 @@ function insert(tablename, german, english) {
   var stmt = db.prepare("INSERT INTO " + tablename + " VALUES (?, ?)");
   stmt.run([german, english], (err) => {
     if (err) {
-      console.log("Word already exists.");
+      console.log("Word already exists, german: %s english: %s", german, english);
     } else {
-      console.log("Word created");
+      console.log("Word created, german: %s english: %s", german, english);
     }
   });
   stmt.finalize();
@@ -87,7 +87,7 @@ function dbClose() {
     if (err) {
       return console.error(err.message);
     }
-    console.log('Close the database connection.');
+    //console.log('Close the database connection.');
   });
 }
 
@@ -145,18 +145,23 @@ function deleteWord(lang, word) {
 }
 
 //Get from the newWords queue
-amqp.connect('amqp://localhost', function(err, conn) {
+amqp.connect('amqp://localhost',function(err, conn) {
   conn.createChannel(function(err, ch) {
     var q = 'newWords';
-    var splitted = q.split(" : ");
-    var german = splitted[0];
-    var english = splitted[1];
 
     ch.assertQueue(q, {durable: false});
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
     ch.consume(q, function(msg) {
-      // TODO insert()
-      console.log(" [x] Received %s", msg.content.toString());
-    }, {noAck: true});
+      // insert into database
+      var splitted = msg.content.toString().split(" : ");
+      var german = splitted[0];
+      var english = splitted[1];
+
+      init();
+      insert("translate", german, english);
+      dbClose();
+
+      //console.log(" [x] Received german: %s english:", german,english);
+    }, {noAck: false});
   });
 });
