@@ -11,6 +11,7 @@
 - start server.js in Client folder with "node server.js"
   in the add area of the webpage:http://localhost:8081/sites/add.html?  words can be added
 - server.js writes in queue newWords and receive.js get the values and insert them into the database
+- derzeit gibt es keine Rückmeldung and den Client, der Server gibt in der Konsole aus ob das Wortpaar erstellt wurde
 
 # START: update node version - on Windows
 ## STEP 1: uninstall old versions of node / npm **
