@@ -11,7 +11,7 @@
     "handlebars",
     "expressjs"
   ],
-  "author": "Georg Wresnik",
+  "author": "Georg Wresnik, Marcus Wallner, Christine Tomek",
   "license": "GPL-2.0",
   "dependencies": {
     "async": "^2.6.1",

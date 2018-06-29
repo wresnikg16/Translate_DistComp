@@ -144,6 +144,11 @@ function deleteWord(lang, word) {
   })
 }
 
+//Create Table
+init();
+createTable("translate");
+dbClose();
+
 //Get from the newWords queue
 amqp.connect('amqp://localhost',function(err, conn) {
   conn.createChannel(function(err, ch) {
@@ -162,6 +167,6 @@ amqp.connect('amqp://localhost',function(err, conn) {
       dbClose();
 
       //console.log(" [x] Received german: %s english:", german,english);
-    }, {noAck: false});
+    }, {noAck: true});
   });
 });

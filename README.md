@@ -7,10 +7,9 @@
     If your version is below v7.6 (e.g. v6.11.3) you need to update it.Follow the steps below *** START: update node version - on Windows ***. 
 - npm install (load alle dependencies)
 - start receive.js in Server folder with "node receive.js"
-- the databse should be created automatic form the server, the table "translate" is currently not automatic created
-  (can be created with createTable("translate") function) 
+- the databse and table is automatically created
 - start server.js in Client folder with "node server.js"
-  in the add area of the webpage words can be added
+  in the add area of the webpage:http://localhost:8081/sites/add.html?  words can be added
 - server.js writes in queue newWords and receive.js get the values and insert them into the database
 
 # START: update node version - on Windows
