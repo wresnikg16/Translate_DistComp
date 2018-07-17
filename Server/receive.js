@@ -9,45 +9,44 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var sqlite = require('sqlite3').verbose();
 var config = yml.sync('config.yml');
-var port = process.env.PORT || config["server"]["port"];
-var db; 
+var socketConfig = "ws://localhost:8082/";
+var db;
 let find_json = [];
-var config = yml.sync('config.yml');
+
 
 //Websocket
 var WebSocketClient = require('websocket').client;
 var client = new WebSocketClient();
 
-function sendResponse(message, server){
-client.on('connectFailed', function(error) {
-  console.log('Connect Error: ' + error.toString());
-});
+function sendResponse(message, server) {
+  client.on('connectFailed', function (error) {
+    console.log('Connect Error: ' + error.toString());
+  });
 
-client.on('connect', function(connection) {
-  console.log('WebSocket Client Connected');
-  connection.on('error', function(error) {
+  client.on('connect', function (connection) {
+    console.log('WebSocket Client Connected');
+    connection.on('error', function (error) {
       console.log("Connection Error: " + error.toString());
-  });
-  connection.on('close', function() {
-      console.log('echo-protocol Connection Closed');
-  });
-  connection.on('message', function(message) {
+    });
+    connection.on('close', function () {
+      console.log('translate-protocol Connection Closed');
+    });
+    connection.on('message', function (message) {
       if (message.type === 'utf8') {
-          console.log("Received: '" + message.utf8Data + "'");
+        console.log("Received: '" + message.utf8Data + "'");
       }
-  });
-  
-  function sendNumber() {
-      if (connection.connected) {
-          connection.sendUTF(message);
-      }
-  }
-  sendNumber();
-});
-client.connect(server, 'echo-protocol');
-}
+    });
 
-sendResponse("test", "ws://localhost:8082/");
+    function sendMessage() {
+      if (connection.connected) {
+        connection.sendUTF(message);
+      }
+    }
+    sendMessage();
+  });
+  client.connect(server, 'translate-protocol');
+}
+//sendResponse("test1234567!!!123456789111112222333344445555666", socketConfig);
 
 //Database
 function init() {
@@ -60,36 +59,36 @@ function init() {
   db.getAsync = function (sql) {
     var that = this;
     return new Promise(function (resolve, reject) {
-        that.get(sql, function (err, row) {
-            if (err)
-                reject(err);
-            else
-                resolve(row);
-        });
+      that.get(sql, function (err, row) {
+        if (err)
+          reject(err);
+        else
+          resolve(row);
+      });
     });
   };
-  
+
   db.allAsync = function (sql) {
     var that = this;
     return new Promise(function (resolve, reject) {
-        that.all(sql, function (err, rows) {
-            if (err)
-                reject(err);
-            else
-                resolve(rows);
-        });
+      that.all(sql, function (err, rows) {
+        if (err)
+          reject(err);
+        else
+          resolve(rows);
+      });
     });
   };
-  
+
   db.runAsync = function (sql) {
     var that = this;
     return new Promise(function (resolve, reject) {
-        that.run(sql, function(err) {
-            if (err)
-                reject(err);
-            else
-                resolve();
-        });
+      that.run(sql, function (err) {
+        if (err)
+          reject(err);
+        else
+          resolve();
+      });
     })
   };
 }
@@ -107,11 +106,17 @@ function createTable(tablename) {
 function insert(tablename, german, english) {
   var stmt = db.prepare("INSERT INTO " + tablename + " VALUES (?, ?)");
   stmt.run([german, english], (err) => {
+
+    var responseMessage = "";
+
     if (err) {
-      console.log("Word already exists, german: %s english: %s", german, english);
+      responseMessage = "Word already exists, german: " + german +" english: " + english;
+      console.log(responseMessage);
     } else {
-      console.log("Word created, german: %s english: %s", german, english);
+      responseMessage = "Word created, german: " + german +" english: " + english;;
+      console.log(responseMessage);
     }
+    //sendResponse(responseMessage, socketConfig);
   });
   stmt.finalize();
 }
@@ -142,7 +147,7 @@ async function dbDeleteWord(lang, word) {
   var row = await db.runAsync(query);
 
   if (!row) {
-    row = {status: "deleted"};
+    row = { status: "deleted" };
   }
 
   return new Promise(resolve => {
@@ -157,7 +162,7 @@ async function dbSelectWord(lang, word) {
   var row = await db.getAsync(query);
 
   if (!row) {
-    row = {status: "nothing found"};
+    row = { status: "nothing found" };
   }
 
   return new Promise(resolve => {
@@ -184,13 +189,13 @@ createTable("translate");
 dbClose();
 
 //Get from the newWords queue
-amqp.connect('amqp://localhost',function(err, conn) {
-  conn.createChannel(function(err, ch) {
+amqp.connect('amqp://localhost', function (err, conn) {
+  conn.createChannel(function (err, ch) {
     var q = 'newWords';
 
-    ch.assertQueue(q, {durable: false});
+    ch.assertQueue(q, { durable: false });
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
-    ch.consume(q, function(msg) {
+    ch.consume(q, function (msg) {
       // insert into database
       var splitted = msg.content.toString().split(" : ");
       var german = splitted[0];
@@ -201,6 +206,6 @@ amqp.connect('amqp://localhost',function(err, conn) {
       dbClose();
 
       //console.log(" [x] Received german: %s english:", german,english);
-    }, {noAck: true});
+    }, { noAck: true });
   });
 });

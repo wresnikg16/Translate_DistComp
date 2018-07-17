@@ -52,16 +52,16 @@ wsServer.on('request', function(request) {
       return;
     }
     
-    var connection = request.accept('echo-protocol', request.origin);
+    var connection = request.accept('translate-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
-            connection.sendUTF(message.utf8Data);
-        }
-        else if (message.type === 'binary') {
-            console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
-            connection.sendBytes(message.binaryData);
+
+            //toDO call function for client feedback
+
+            //Send Info to server of recieved message
+            connection.sendUTF("got your message: " + message.utf8Data);
         }
     });
     connection.on('close', function(reasonCode, description) {
@@ -80,16 +80,14 @@ function sendToQueue(wordPair) {
 
       ch.assertQueue(q, {durable: false});
       // Note: on Node 6 Buffer.from(msg) should be used
-      ch.sendToQueue(q, new Buffer(msg));
+      ch.sendToQueue(q, new Buffer.from(msg));
       console.log(" [x] Sent %s", msg);
       });
   //Close the Connection
-  setTimeout(function() { conn.close(); process.exit(0) }, 500);
+  setTimeout(function() { conn.close(); }, 500);
 });
 
 }
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/sites', express.static(__dirname + "/sites"));
