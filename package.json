@@ -24,6 +24,7 @@
     "formidable": "^1.0.17",
     "read-yaml": "^1.1.0",
     "request": "^2.87.0",
-    "sqlite3": "^4.0.1"
+    "sqlite3": "^4.0.1",
+    "websocket": "^1.0.26"
   }
 }
