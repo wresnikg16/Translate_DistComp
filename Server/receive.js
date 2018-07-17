@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 var amqp = require('amqplib/callback_api');
 
 var yml = require('read-yaml');
@@ -14,6 +13,8 @@ var port = process.env.PORT || config["server"]["port"];
 var db; 
 let find_json = [];
 var config = yml.sync('config.yml');
+
+var connection = new WebSocket('ws://10.71.2.233:1337');
 
 //Database
 function init() {
