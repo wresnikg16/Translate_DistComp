@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-  <title>RIA | Project</title>
+  <title>DistComp | Dict</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <meta name="author" content="Wachter, Tomek, Wresnik, Wallner">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="/sites/scripts.js"></script>
 </head>
 
 <body onload="loadJson()">
@@ -15,13 +16,12 @@
     <div class="display-middle xlarge">
       <h1>SWDictionary</h1>
       <div id="all">
-        <script src="/sites/scripts.js"></script>
       </div>
       <h2>Delete Entry</h2>
         Name:
-        <br>
+        <br/>
         <input name="name" id="name">
-        <br>
+        <br/>
       <button type="button" onclick="removeWord()" class="button brown">Delete</button>
       <div id="removed"></div>
     </div>

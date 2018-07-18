@@ -43,7 +43,6 @@ legend{color:inherit;display:table;max-width:100%;padding:0;white-space:normal}t
 @media (max-width:992px){.sidebar.collapse{display:none}.main{margin-left:0!important;margin-right:0!important}}
 /* End Media */
 
-
 body,h1,h5 {font-family: "Raleway", sans-serif}
 body{font-size: 1em}
 body, html {height: 100%}
@@ -77,18 +76,3 @@ body, html {height: 100%}
 .text-white,.hover-text-white:hover{color:#fff!important}
 .brown,.hover-brown:hover{color:#fff!important;background-color:#cc9966!important}
 .sand,.hover-sand:hover{color:#000!important;background-color:#fdf5e6!important}
-
-/*.modal-content{margin:auto;background-color:#fff;position:relative;padding:0;outline:0;width:600px}
-.modal-content:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-.column {
-    float: left;
-    width: 50%;
-    padding: 15px;
-}*/
-
-
-

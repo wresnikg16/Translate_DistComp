@@ -128,6 +128,38 @@ router.post('/new', async function (req, res) {
   */
 });
 
+/*router.get('/findall', async function (req, res) {
+  var word = req.params.word;
+  //init();
+  find_json = await dbSelectAll();
+  dbClose();
+  console.log(find_json);
+  res.send(find_json);
+});
+
+async function dbSelectAll() {
+  var query = "SELECT * FROM dictionary";
+  var rows = await db.allAsync(query); // allAsync ????
+
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(rows);
+    }, 100);
+  })
+}
+
+ db.allAsync = function (sql) {
+    var that = this;
+    return new Promise(function (resolve, reject) {
+        that.all(sql, function (err, rows) {
+            if (err)
+                reject(err);
+            else
+                resolve(rows);
+        });
+    });
+  };*/
+
 // START THE SERVER
 // ==============================
 

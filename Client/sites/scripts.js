@@ -16,12 +16,7 @@ function myFunction(arr) {
     var out = "<ul>";
     var i;
     for (i = 0; i < arr.length; i++) {
-        out += '<li>' + arr[i].german + ' | ' + arr[i].english
-            //+ '<form action="/delete" method="post" target="_self" class="form">' 
-            //+ '<button class="button brown">delete</button>'
-            //+ '</form>'
-            + '</li>'
-        //'<a href="/find/' + arr[i].german + '">' + arr[i].english + '<br>';
+        out += '<li>' + arr[i].german + ' | ' + arr[i].english + '</li>'
     }
     out += "</ul>";
     document.getElementById("all").innerHTML = out;
@@ -129,19 +124,6 @@ function loadAdd() {
     xmlhttp.send();
 }
 */
-function getLocation(){
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        document.getElementById("geo").innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function showPosition(position) {
-    lat = position.coords.latitude
-    lon = position.coords.longitude
-
-    document.getElementById("geo").innerHTML = "Dein Standort: Breitengrad: " + lat + " | Längengrad: " + lon;
-}
 
 function vibrate() {
     var supportsVibrate = "vibrate" in navigator;
