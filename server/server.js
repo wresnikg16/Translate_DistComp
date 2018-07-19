@@ -70,24 +70,41 @@ wsServer.on('request', function(request) {
 });
 
 
-//Send to RabbitMQ
-function sendToQueue(wordPair) {
+//Send the wordpair to add to the Add Queue
+function sendToQueueAdd(wordPair) {
 
   amqp.connect('amqp://localhost', function(err, conn) {
-      conn.createChannel(function(err, ch) {
-      var q = 'newWords';
-      var msg = wordPair;
+    conn.createChannel(function(err, ch) {
+    var q = 'newWords';
+    var msg = wordPair;
 
-      ch.assertQueue(q, {durable: false});
-      // Note: on Node 6 Buffer.from(msg) should be used
-      ch.sendToQueue(q, new Buffer.from(msg));
-      console.log(" [x] Sent %s", msg);
-      });
-  //Close the Connection
-  setTimeout(function() { conn.close(); }, 500);
-});
-
+    ch.assertQueue(q, {durable: false});
+    // Note: on Node 6 Buffer.from(msg) should be used
+    ch.sendToQueueAdd(q, new Buffer.from(msg));
+    console.log(" [x] Sent %s", msg);
+    });
+    //Close the Connection
+    setTimeout(function() { conn.close(); }, 500);
+  });
 }
+
+//Send the word to search for to the Find Queue
+function sendToQueueFind(word) {
+
+  amqp.connect('amqp://localhost', function(err, conn) {
+    conn.createChannel(function(err, ch) {
+    var q = 'findQueue';
+    var msg = word;
+
+    ch.assertQueue(q, {durable: false});
+    ch.sendToQueueFind(q, new Buffer.from(msg));
+    console.log(" [x] Sent %s to find queue", msg);
+    });
+    //Close the Connection
+    setTimeout(function() { conn.close(); }, 500);
+  });
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/sites', express.static(__dirname + "/sites"));
@@ -114,7 +131,7 @@ router.post('/new', async function (req, res) {
   var german = req.body.german;
   var english = req.body.english;
 
-  sendToQueue(german + " : " + english);
+  sendToQueueAdd(german + " : " + english);
   /*
   init();
   insert("translate", german, english);
@@ -126,6 +143,12 @@ router.post('/new', async function (req, res) {
     res.send(find_json);
   }
   */
+});
+
+
+router.get('/find', async function (req, res) {
+  var word = req.body.word;
+  sendToQueueFind(word);
 });
 
 /*router.get('/findall', async function (req, res) {
