@@ -117,7 +117,7 @@ function insert(tablename, german, english) {
       responseMessage = "Word created, german: " + german +" english: " + english;;
       console.log(responseMessage);
     }
-    //sendResponse(responseMessage, socketConfig);
+    sendResponse(responseMessage, socketConfig);
   });
   stmt.finalize();
 }

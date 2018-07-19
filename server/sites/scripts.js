@@ -24,21 +24,21 @@ function myFunction(arr) {
 
 // function that executes after the search button is pressed
 function search() {
-    // console.log("started loadWord()");
-    // var xmlhttp = new XMLHttpRequest();
-    // var word = document.getElementById("search").value;
-    // console.log(word);
-    // var url = "/find";
+     console.log("started loadWord()");
+     var xmlhttp = new XMLHttpRequest();
+     var word = document.getElementById("search").value;
+     console.log(word);
+     var url = "/find";
 
-    // xmlhttp.onreadystatechange = function () {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         var myJson = JSON.parse(this.responseText);
-    //         myJsonFunction(myJson);
-    //     }
-    // };
-    // xmlhttp.open("GET", url, true);
-    // xmlhttp.setRequestHeader("Content-Type", "text/plain");
-    // xmlhttp.send(word);
+     xmlhttp.onreadystatechange = function () {
+         if (this.readyState == 4 && this.status == 200) {
+             var myJson = JSON.parse(this.responseText);
+             myJsonFunction(myJson);
+         }
+     };
+     xmlhttp.open("GET", url, true);
+     xmlhttp.setRequestHeader("Content-Type", "text/plain");
+     xmlhttp.send(word);
 
 }
 
@@ -112,7 +112,7 @@ function RemoveFunction(myJson) {
     loadJson();
 }
 
-/*
+
 function loadAdd() {
     var xmlhttp = new XMLHttpRequest();
     var url = "/add";
@@ -128,7 +128,7 @@ function loadAdd() {
     xmlhttp.open("POST", url, true);
     xmlhttp.send();
 }
-*/
+
 
 function vibrate() {
     var supportsVibrate = "vibrate" in navigator;
@@ -139,4 +139,20 @@ function vibrate() {
             navigator.vibrate(time * 1000);
         }
     }
+}
+
+function loadWord() {
+    var xmlhttp = new XMLHttpRequest();
+    var word = document.getElementById("search").value;
+    console.log(word);
+    var url = "/find/" + word;
+
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var myJson = JSON.parse(this.responseText);
+            myJsonFunction(myJson);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
 }

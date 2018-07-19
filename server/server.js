@@ -145,12 +145,16 @@ router.post('/new', async function (req, res) {
   */
 });
 
-
+router.get("/find/:word", async function (req, res) {
+  var word = req.params.word;
+  sendToQueueFind(word);
+});
+/*
 router.get('/find', async function (req, res) {
   var word = req.body.word;
   sendToQueueFind(word);
 });
-
+*/
 /*router.get('/findall', async function (req, res) {
   var word = req.params.word;
   //init();
