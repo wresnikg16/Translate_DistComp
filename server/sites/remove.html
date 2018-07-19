@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>DistComp | Dict</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="Tomek, Wresnik, Wallner">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="/sites/scripts.js"></script>
-</head>
+  <head>
+    <title>DistComp | Dict</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tomek, Wresnik, Wallner">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="/sites/scripts.js"></script>
+  </head>
 
-<body onload="loadJson()">
-  <div class="bgimg display-container text-white">
-    <div class="display-middle xlarge">
-      <h1>SWDictionary</h1>
-      <div id="all">
+  <body onload="loadJson()">
+    <div class="bgimg display-container text-white">
+      <div class="display-middle xlarge">
+        <h1>Delete an entry</h1>
+        <br/>
+        <div>
+          delete:<br/>
+          <input name="name" id="name">
+          <br/><br/>
+          <button type="button" onclick="removeWord()" class="button brown">Delete</button>
+        </div>
+        <div id="removed"></div>
       </div>
-      <h2>Delete Entry</h2>
-        Name:
-        <br/>
-        <input name="name" id="name">
-        <br/>
-      <button type="button" onclick="removeWord()" class="button brown">Delete</button>
-      <div id="removed"></div>
+      <div class="display-topleft container xxlarge">
+        <form action="/" method="get" target="_self"class="form">
+          <button class="button brown">back</button>
+        </form>
+      </div>
     </div>
-    <div class="display-topleft container xxlarge">
-      <form action="/" method="get" target="_self"class="form">
-        <button class="button brown">back</button>
-      </form>
-    </div>
-  </div>
-</body>
-
+  </body>
 </html>
