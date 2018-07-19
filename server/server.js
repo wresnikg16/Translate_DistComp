@@ -59,7 +59,7 @@ wsServer.on('request', function(request) {
             console.log('Received Message: ' + message.utf8Data);
 
             //toDO call function for client feedback
-
+            //res.send(message.utf8Data);
             //Send Info to server of recieved message
             connection.sendUTF("got your message: " + message.utf8Data);
         }
