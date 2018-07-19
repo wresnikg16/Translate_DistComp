@@ -75,8 +75,25 @@ function sendToQueueAdd(wordPair) {
 
   amqp.connect('amqp://localhost', function(err, conn) {
     conn.createChannel(function(err, ch) {
-    var q = 'newWords';
+    var q = 'addQueue';
     var msg = wordPair;
+
+    ch.assertQueue(q, {durable: false});
+    // Note: on Node 6 Buffer.from(msg) should be used
+    ch.sendToQueue(q, new Buffer.from(msg));
+    console.log(" [x] Sent %s", msg);
+    });
+    //Close the Connection
+    setTimeout(function() { conn.close(); }, 500);
+  });
+}
+
+function sendToQueueDelete(word) {
+
+  amqp.connect('amqp://localhost', function(err, conn) {
+    conn.createChannel(function(err, ch) {
+    var q = 'deleteQueue';
+    var msg = word;
 
     ch.assertQueue(q, {durable: false});
     // Note: on Node 6 Buffer.from(msg) should be used
@@ -149,6 +166,14 @@ router.get("/find/:word", async function (req, res) {
   var word = req.params.word;
   sendToQueueFind(word);
 });
+router.post('/delete', async function (req, res) {
+  var word;
+  if (req.body.word !== undefined) {
+      word = req.body.word;
+      sendToQueueDelete(word);
+  }
+});
+
 /*
 router.get('/find', async function (req, res) {
   var word = req.body.word;
