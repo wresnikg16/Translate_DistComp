@@ -80,7 +80,7 @@ function sendToQueueAdd(wordPair) {
 
     ch.assertQueue(q, {durable: false});
     // Note: on Node 6 Buffer.from(msg) should be used
-    ch.sendToQueueAdd(q, new Buffer.from(msg));
+    ch.sendToQueue(q, new Buffer.from(msg));
     console.log(" [x] Sent %s", msg);
     });
     //Close the Connection
@@ -97,7 +97,7 @@ function sendToQueueFind(word) {
     var msg = word;
 
     ch.assertQueue(q, {durable: false});
-    ch.sendToQueueFind(q, new Buffer.from(msg));
+    ch.sendToQueue(q, new Buffer.from(msg));
     console.log(" [x] Sent %s to find queue", msg);
     });
     //Close the Connection
