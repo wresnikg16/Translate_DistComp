@@ -62,8 +62,7 @@ function addWord() {
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            var myJson = JSON.parse(this.responseText);
-            AddFunction(myJson);
+            AddFunction(this.responseText);
         }
     };
 
@@ -72,15 +71,8 @@ function addWord() {
     xmlhttp.send(JSON.stringify(params));
 }
 
-function AddFunction(myJson) {
-    var out = "";
-    if (myJson.status == "ok"){
-        out = 'Added it';
-        vibrate();
-    } else {
-        out = 'There was a mistake';
-    }
-    document.getElementById("done").innerHTML = out;
+function AddFunction(text) {
+    document.getElementById("done").innerHTML = text;
 }
 
 function removeWord() {

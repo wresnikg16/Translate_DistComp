@@ -5,12 +5,12 @@ var express = require('express');
 var sqlite = require('sqlite3').verbose();
 var socketConfig = "ws://localhost:8082/";
 var db;
+var responseMessage = "";
 
 //Websocket
 var WebSocketClient = require('websocket').client;
 var client = new WebSocketClient();
 
-function sendResponse(message, server) {
   client.on('connectFailed', function (error) {
     console.log('Connect Error: ' + error.toString());
   });
@@ -27,17 +27,19 @@ function sendResponse(message, server) {
       if (message.type === 'utf8') {
         console.log("Received: '" + message.utf8Data + "'");
       }
+      connection.close();
     });
 
     function sendMessage() {
       if (connection.connected) {
-        connection.sendUTF(message);
+        connection.sendUTF(responseMessage);
       }
     }
     sendMessage();
   });
-  client.connect(server, 'translate-protocol');
-}
+
+ 
+
 
 //Database
 function init() {
@@ -64,8 +66,6 @@ function insert(tablename, german, english) {
   var stmt = db.prepare("INSERT INTO " + tablename + " VALUES (?, ?)");
   stmt.run([german, english], (err) => {
 
-    var responseMessage = "";
-
     if (err) {
       responseMessage = "Word already exists, german: " + german +" english: " + english;
       console.log(responseMessage);
@@ -73,7 +73,9 @@ function insert(tablename, german, english) {
       responseMessage = "Word created, german: " + german +" english: " + english;;
       console.log(responseMessage);
     }
-    sendResponse(responseMessage, socketConfig);
+    //sendResponse(responseMessage, socketConfig);
+    client.connect(socketConfig, 'translate-protocol');
+    //client.
   });
   stmt.finalize();
 }
