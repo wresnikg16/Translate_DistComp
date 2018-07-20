@@ -2,8 +2,8 @@
 ***
 - Zuerst, kontolliere durch Eingabe in der Kommandozeile (cmd.exe) ob und welche Version von node.js installiert ist:
     ```where node```  
-    ```node --version```
-    Wenn deine Verion unter v7.6 ist (z.B. v6.11.3), dann musst du sie aktualisieren. Folge den Schritten: [update node version - on Windows](./documentation/updateNodeVersion.md).
+    ```node --version```  
+    Wenn deine Version unter v7.6 ist (z.B. v6.11.3), dann musst du sie aktualisieren. Folge den Schritten: [update node version - on Windows](./documentation/updateNodeVersion.md).
 - ```npm install``` lädt alle notwendigen Abhängigkeiten und Bibliotheken
 - wechsle in den **workers** Ordner und starte **addworker.js** um die Datenbank zu initialisieren und automatisch ihre Tabelle zu kreieren.  
    ```cd .\workers```  
