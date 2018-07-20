@@ -15,13 +15,13 @@
  - If it's still not uninstalled, type where node at the command prompt and you'll see where it resides -- delete that (and probably the parent directory) too.
  - Reboot, for good measure.
 ### STEP 2: install nvm
-    https://github.com/coreybutler/nvm-windows/releases
+    <https://github.com/coreybutler/nvm-windows/releases>
  - download the latest nvm-setup.zip
  - unzip and run it, follow the setup wizard
  - start a new CLI and type "nvm" to check if its properly installed, you should get the running version and usage information. 
 ### STEP 3: install node & npm 
- - type "nvm install latest" into your CLI and restart it
- - "nvm arch" shows if node is running in 32 or 64 bit mode, "nvm list" lists the node.js installations.
- - type "nvm use yourVersionNumber", you should receive something like this: 'Now using node v10.5.0 (64-bit)'
- - check again "node --version" and go on with the installation of our project 
+ - type ```nvm install latest``` into your CLI and restart it
+ - ```nvm arch``` shows if node is running in 32 or 64 bit mode, ```nvm list``` lists the node.js installations.
+ - type ```nvm use 'yourVersionNumber'```, you should receive something like this: 'Now using node v10.5.0 (64-bit)'
+ - check again ```node --version``` and go on with the installation of our project 
  ### END: update node version - on Windows
