@@ -1,6 +1,6 @@
 ## START: update node version - on Windows
-### STEP 1: uninstall old versions of node / npm **
-    https://stackoverflow.com/questions/20711240/how-to-completely-remove-node-js-from-windows
+### STEP 1: uninstall old versions of node / npm
+   [stackoverflow: How to completely remove node.js from windows](https://stackoverflow.com/questions/20711240/how-to-completely-remove-node-js-from-windows)
  - Uninstall from Programs & Features with the uninstaller.
  - Reboot (or you probably can get away with killing all node-related processes from Task Manager).
  - Look for these folders and remove them (and their contents) if any still exist. Depending on the version you installed, UAC settings, and CPU architecture, these may or may not exist:
@@ -14,8 +14,7 @@
  - If it's still not uninstalled, type ```where node``` into the command prompt and you'll see where it resides -- delete that (and probably the parent directory) too.
  - Reboot, for good measure.
 ### STEP 2: install nvm
-    <https://github.com/coreybutler/nvm-windows/releases>
- - download the latest nvm-setup.zip
+ - download the latest [nvm-setup.zip](https://github.com/coreybutler/nvm-windows/releases)
  - unzip and run it, follow the setup wizard
  - start a new CLI and type ```nvm``` to check if its properly installed, you should get the running version and usage information. 
 ### STEP 3: install node & npm 
