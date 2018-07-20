@@ -149,6 +149,7 @@ router.post('/new', async function (req, res) {
   var english = req.body.english;
 
   sendToQueueAdd(german + " : " + english);
+  res.send("your word was send to the add queue");
   /*
   init();
   insert("translate", german, english);
@@ -166,11 +167,13 @@ router.get("/find/:word", async function (req, res) {
   var word = req.params.word;
   sendToQueueFind(word);
 });
+
 router.post('/delete', async function (req, res) {
   var word;
   if (req.body.word !== undefined) {
       word = req.body.word;
       sendToQueueDelete(word);
+      res.send("your word was sent to the delete queue");
   }
 });
 

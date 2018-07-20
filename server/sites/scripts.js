@@ -73,6 +73,8 @@ function addWord() {
 
 function AddFunction(text) {
     document.getElementById("done").innerHTML = text;
+    document.getElementById("german").value = ""; 
+    document.getElementById("english").value = ""; 
 }
 
 function removeWord() {
@@ -83,25 +85,19 @@ function removeWord() {
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            var myJson = JSON.parse(this.responseText);
-            RemoveFunction(myJson);
+            RemoveFunction(this.responseText);
         }
     };
+    
     xmlhttp.open("POST", url, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(JSON.stringify(params));
+    
 }
 
-function RemoveFunction(myJson) {
-    var out = "";
-    if (myJson.status == "deleted"){
-        out = 'Removed it';
-        vibrate();
-    } else {
-        out = 'There was a mistake';
-    }
-    document.getElementById("removed").innerHTML = out;
-    loadJson();
+function RemoveFunction(text) {
+    document.getElementById("removed").innerHTML = text;
+    document.getElementById("name").value =""; 
 }
 
 
