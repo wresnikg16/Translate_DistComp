@@ -5,7 +5,7 @@
     ```node --version```
     If your version is below v7.6 (e.g. v6.11.3) you need to update it.Follow the steps: [update node version - on Windows](./documentation/updateNodeVersion.md). 
 - ```npm install``` loads all necessary dependencies and libraries
-- go to the **workers** folder and start **addworker.js** to initialise the database and automatically create its table
+- go to the **workers** folder and start **addworker.js** to initialise the database and automatically create its table  
    ```cd .\workers```  
    ```node addworker.js```
 - got to the **server** folder and start **server.js** to get the front end running  
