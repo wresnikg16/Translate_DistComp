@@ -2,7 +2,7 @@ import pika
 import sqlite3
 from websocket import create_connection
 
-print("started python worker")
+print("started python findworker")
 
 # define connection which is located at "localhost"
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))

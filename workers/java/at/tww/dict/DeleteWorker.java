@@ -84,7 +84,6 @@ public class DeleteWorker {
             }
         };
         boolean autoAck = false;
-
         channel.basicConsume(QUEUE_NAME, autoAck, consumer);
     }
 

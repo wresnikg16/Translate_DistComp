@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 var amqp = require('amqplib/callback_api');
 
-var express = require('express');
+// var express = require('express');
 var sqlite = require('sqlite3').verbose();
 var socketConfig = "ws://localhost:8082/";
 var db;
 var responseMessage = "";
+
+console.log("started JS addworker")
 
 //Websocket
 var WebSocketClient = require('websocket').client;
@@ -48,7 +50,6 @@ function init() {
         if (err) {
             return console.error(err.message);
         }
-        //console.log('Connected to the SQlite db.');
     });
 }
 
@@ -73,9 +74,7 @@ function insert(tablename, german, english) {
       responseMessage = "Word created, german: " + german +" english: " + english;;
       console.log(responseMessage);
     }
-    //sendResponse(responseMessage, socketConfig);
     client.connect(socketConfig, '');
-    //client.
   });
   stmt.finalize();
 }
@@ -85,7 +84,6 @@ function dbClose() {
     if (err) {
       return console.error(err.message);
     }
-    //console.log('Close the database connection.');
   });
 }
 
@@ -111,7 +109,6 @@ amqp.connect('amqp://localhost', function (err, conn) {
       insert("translate", german, english);
       dbClose();
 
-      //console.log(" [x] Received german: %s english:", german,english);
     }, { noAck: true });
   });
 });
