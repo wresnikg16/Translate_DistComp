@@ -26,16 +26,11 @@ var server = http.createServer(function(request, response) {
     response.end();
 });
 server.listen(8082, function() {
-    console.log((new Date()) + ' Server is listening on port 8082');
+    console.log((new Date()) + ' Websocket Server is listening on port 8082');
 });
  
 wsServer = new WebSocketServer({
     httpServer: server,
-    // You should not use autoAcceptConnections for production
-    // applications, as it defeats all standard cross-origin protection
-    // facilities built into the protocol and the browser.  You should
-    // *always* verify the connection's origin and decide whether or not
-    // to accept it.
     autoAcceptConnections: false
 });
  
@@ -58,9 +53,7 @@ wsServer.on('request', function(request) {
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
 
-            //toDO call function for client feedback
-            //res.send(message.utf8Data);
-            //Send Info to server of recieved message
+            //TODO call function for client feedback
             connection.sendUTF("got your message: " + message.utf8Data);
         }
     });
@@ -150,17 +143,6 @@ router.post('/new', async function (req, res) {
 
   sendToQueueAdd(german + " : " + english);
   res.send("your word was send to the add queue");
-  /*
-  init();
-  insert("translate", german, english);
-  find_json = await dbSelectWord("german", german);
-  dbClose();
-  if (find_json["status"] != "nothing found") {
-    res.send({status: "ok"});
-  } else {
-    res.send(find_json);
-  }
-  */
 });
 
 router.get("/find/:word", async function (req, res) {
@@ -177,48 +159,10 @@ router.post('/delete', async function (req, res) {
   }
 });
 
-/*
-router.get('/find', async function (req, res) {
-  var word = req.body.word;
-  sendToQueueFind(word);
-});
-*/
-/*router.get('/findall', async function (req, res) {
-  var word = req.params.word;
-  //init();
-  find_json = await dbSelectAll();
-  dbClose();
-  console.log(find_json);
-  res.send(find_json);
-});
-
-async function dbSelectAll() {
-  var query = "SELECT * FROM dictionary";
-  var rows = await db.allAsync(query); // allAsync ????
-
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(rows);
-    }, 100);
-  })
-}
-
- db.allAsync = function (sql) {
-    var that = this;
-    return new Promise(function (resolve, reject) {
-        that.all(sql, function (err, rows) {
-            if (err)
-                reject(err);
-            else
-                resolve(rows);
-        });
-    });
-  };*/
-
 // START THE SERVER
 // ==============================
 
 app.use('/', router);
 
 app.listen(port, config["server"]["ip"]);
-console.log("Making le voodoo on port " + port + "! Go and check it out!");
+console.log("Webserver started on port  " + port + "! Go and check it out!");
