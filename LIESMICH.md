@@ -1,15 +1,16 @@
 # Wie bekommt man das Projekt zum Laufen
-***
-- Zuerst, kontrolliere durch Eingabe in der Kommandozeile (cmd.exe) ob und welche Version von node.js installiert ist:
+
+- kontrolliere durch Eingabe in der Kommandozeile (cmd.exe) ob und welche Version von node.js installiert ist:
     ```where node```  
     ```node --version```  
-    Wenn deine Version unter v7.6 ist (z.B. v6.11.3), dann musst du sie aktualisieren. Folge den Schritten: [update node version - on Windows](./documentation/updateNodeVersion.md).
-- ```npm install``` lädt alle notwendigen Abhängigkeiten und Bibliotheken
-- wechsle in den **workers** Ordner und starte **addworker.js** um die Datenbank zu initialisieren und automatisch ihre Tabelle zu kreieren.  
-   ```cd .\workers```  
-   ```node addworker.js```
-- wechsle in den **server** Ordner und starte **server.js** um das Front End zum Laufen zu bringen  
-   ```cd .\server```  
-   ```node server.js```
-- Öffne deinen Browser auf [http://localhost:8081]
+    Wenn die Version unter v7.6 ist dann muss sie aktualisiert werden.  
+    Entweder benutze die aktuellste Verstion oder folge diesen Schritten: [update node version - on Windows](./documentation/updateNodeVersion.md).
+- downloade und installiere [RabbitMQ](https://www.rabbitmq.com/download.html) und die notwendigen [Plugins](https://www.rabbitmq.com/management.html). 
+- kontrolliere ob die Umgebungsvariable die Pfade zu den executables für Node, Python und Java beinhaltet.
+- tippe ```.\start.bat``` in die Kommandozeile um  
+   - die notwendigen node Module zu installieren  
+   - Python Bibliotheken zu installieren  
+   - die drei Worker zu starten  
+   - und den node Webserver zu starten
+- öffne den Browser auf [http://localhost:8081](http://localhost:8081)
 - im add/search/delete Bereich der Webseite können Wörter hinzugefügt, gesucht und aus dem Wörterbuch gelöscht werden.
