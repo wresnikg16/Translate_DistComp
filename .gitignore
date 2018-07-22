@@ -62,3 +62,9 @@ typings/
 
 # database
 *.db
+
+# IDE
+./.idea
+
+workers/db/*
+documentation/~$*
