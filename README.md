@@ -8,8 +8,8 @@
 - go to the **workers** folder and start **addworker.js** to initialise the database and automatically create its table  
    ```cd .\workers```  
    ```node addworker.js```
-- got to the **server** folder and start **server.js** to get the front end running  
-   ```cd ..\server```  
+- open a new CLI, go to the **server** folder and start **server.js** to get the front end running  
+   ```cd .\server```  
    ```node server.js```
 - open your browser on <http://localhost:8081>
 - in the add/search/delete area of the webpage words can be added, searched for or deleted from the dictionary.

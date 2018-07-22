@@ -44,12 +44,12 @@ var client = new WebSocketClient();
 //Database
 function init() {
 
-  db = new sqlite.Database('./db/dictionary.db', (err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    //console.log('Connected to the SQlite db.');
-  });
+    db = new sqlite.Database('./db/dictionary.db', (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        //console.log('Connected to the SQlite db.');
+    });
 }
 
 function createTable(tablename) {
