@@ -56,5 +56,5 @@ channel.basic_consume(callback,
                       queue='findQueue',
                       no_ack=True)
 
-print(' [*] Waiting for messages. To exit press CTRL+C')
+print(' [*] Waiting for messages in findQueue. To exit press CTRL+C')
 channel.start_consuming()

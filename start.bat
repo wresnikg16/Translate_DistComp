@@ -1,11 +1,19 @@
-echo Start DB & Addworker
-call cd ./workers
-call node addworker.js
+@echo off
 
-echo Start GUI
-call cd ../server
-call node server.js
+call npm install
+call pip install pika
+call pip install websocket-client
 
-echo Start other workers
-call cd ../workers
-::call java
+echo starting JavaScript addworker...
+cd .\workers
+start cmd /k call .\findworker.py
+
+echo starting Python findworker...
+start cmd /k call node .\addworker
+
+echo starting Java deleteworker...
+start cmd /k call java -jar DeleteWorker.jar
+
+echo starting Node Webserver...
+cd ..\Server
+call node .\server.js
