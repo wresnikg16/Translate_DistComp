@@ -67,4 +67,4 @@ typings/
 ./.idea
 
 *.db
-/workers/db/*
+/workers/db/
