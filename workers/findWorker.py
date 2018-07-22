@@ -18,7 +18,11 @@ c = conn.cursor()
 def get_entry(search_word):
     with conn:
         c.execute("SELECT * FROM translate WHERE german=:search OR english=:search", {'search': search_word, 'search': search_word})
-        result = c.fetchone()
+        result_tpl = c.fetchone()
+        if result_tpl is not None:
+            result = list(result_tpl)
+        else:
+            result = None 
     return result
 
 # create method which will be called at receiving new message in findQueue
@@ -26,7 +30,12 @@ def callback(ch, method, properties, body):
     search_word = body.decode("utf-8")
     print(f' [x] Received {search_word}')
     result = get_entry(search_word)
-    print(result)
+    if result is not None:
+        german = result[0]
+        english = result[1]
+        print( f' [x] Worker found german: {german} english {english}')
+    else:
+        print( f" [x] Worker couldn't find {search_word}")
 
 	# hint: https://stackoverflow.com/questions/31529421/weird-output-value-bvalue-r-n-python-serial-read
     # print(" [x] Received %r" % body.decode('utf-8'))
