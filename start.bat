@@ -15,5 +15,5 @@ echo starting Java deleteworker...
 start cmd /k call java -jar DeleteWorker.jar
 
 echo starting Node Webserver...
-cd ..\Server
+cd .\server
 call node .\server.js
