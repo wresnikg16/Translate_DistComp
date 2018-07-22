@@ -34,7 +34,7 @@ def callback(ch, method, properties, body):
     if result is not None:
         german = result[0]
         english = result[1]
-        print(f' [x] Worker found german: {german} english {english}')
+        print(f' [x] Worker found german: {german} english: {english}')
         ws = create_connection("ws://localhost:8082")
         ws.send(f'german: {german} english {english}')
         print(" [x] Sent Message to Websocket")

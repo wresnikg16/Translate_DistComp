@@ -1,5 +1,3 @@
-// server.js
-
 // BASE SETUP
 // ==============================
 var amqp = require('amqplib/callback_api');
@@ -35,7 +33,7 @@ wsServer = new WebSocketServer({
 });
  
 function originIsAllowed(origin) {
-  // put logic here to detect whether the specified origin is allowed.
+  // we allow everyone to connect to our websocket
   return true;
 }
  
@@ -63,7 +61,7 @@ wsServer.on('request', function(request) {
 });
 
 
-//Send the wordpair to add to the Add Queue
+// Send the wordpair to add to the Add Queue
 function sendToQueueAdd(wordPair) {
 
   amqp.connect('amqp://localhost', function(err, conn) {
@@ -72,7 +70,6 @@ function sendToQueueAdd(wordPair) {
     var msg = wordPair;
 
     ch.assertQueue(q, {durable: false});
-    // Note: on Node 6 Buffer.from(msg) should be used
     ch.sendToQueue(q, new Buffer.from(msg));
     console.log(" [x] Sent %s", msg);
     });
@@ -81,15 +78,14 @@ function sendToQueueAdd(wordPair) {
   });
 }
 
+// Send the word to delete to the deleteQueue
 function sendToQueueDelete(word) {
-
   amqp.connect('amqp://localhost', function(err, conn) {
     conn.createChannel(function(err, ch) {
     var q = 'deleteQueue';
     var msg = word;
 
     ch.assertQueue(q, {durable: false});
-    // Note: on Node 6 Buffer.from(msg) should be used
     ch.sendToQueue(q, new Buffer.from(msg));
     console.log(" [x] Sent %s", msg);
     });
@@ -122,7 +118,6 @@ app.use(express.static('imgs'));
 
 // ROUTES
 // ==============================
-
 router.get('/', function (req, res) {
   res.sendfile("sites/index.html");
 });
@@ -136,7 +131,7 @@ router.get('/remove', function (req, res) {
 });
 
 // ROUTES WITH PARAMETER
-
+// ==============================
 router.post('/new', async function (req, res) {
   var german = req.body.german;
   var english = req.body.english;
@@ -161,8 +156,6 @@ router.post('/delete', async function (req, res) {
 
 // START THE SERVER
 // ==============================
-
 app.use('/', router);
-
 app.listen(port, config["server"]["ip"]);
 console.log("Webserver started on port  " + port + "! Go and check it out!");
