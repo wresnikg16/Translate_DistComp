@@ -66,5 +66,5 @@ typings/
 # IDE
 ./.idea
 
-workers/db/*
-documentation/~$*
+*.db
+/workers/db/*
