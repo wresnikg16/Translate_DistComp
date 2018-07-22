@@ -21,7 +21,7 @@ var client = new WebSocketClient();
       console.log("Connection Error: " + error.toString());
     });
     connection.on('close', function () {
-      console.log('translate-protocol Connection Closed');
+      console.log('Websocket Connection Closed');
     });
     connection.on('message', function (message) {
       if (message.type === 'utf8') {
@@ -74,7 +74,7 @@ function insert(tablename, german, english) {
       console.log(responseMessage);
     }
     //sendResponse(responseMessage, socketConfig);
-    client.connect(socketConfig, 'translate-protocol');
+    client.connect(socketConfig, '');
     //client.
   });
   stmt.finalize();

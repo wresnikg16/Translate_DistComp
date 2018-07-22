@@ -52,7 +52,7 @@ wsServer.on('request', function(request) {
       return;
     }
     
-    var connection = request.accept('translate-protocol', request.origin);
+    var connection = request.accept("", request.origin);
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
