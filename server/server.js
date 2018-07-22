@@ -8,7 +8,6 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var config = yml.sync('config.yml');
 var port = process.env.PORT || config["server"]["port"];
-var config = yml.sync('config.yml');
 
 //Websocket
 var WebSocketServer = require('websocket').server;
