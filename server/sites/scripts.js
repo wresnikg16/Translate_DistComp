@@ -4,7 +4,6 @@ function myJsonFunction(myJson) {
         out = "Sorry, nothing found";
     } else {
         out = 'German: ' + myJson.german + ' English: ' + myJson.english;
-        vibrate();
     }
     document.getElementById("word").innerHTML = out;
 }
@@ -54,17 +53,6 @@ function removeWord() {
 function RemoveFunction(text) {
     document.getElementById("removed").innerHTML = text;
     document.getElementById("name").value =""; 
-}
-
-function vibrate() {
-    var supportsVibrate = "vibrate" in navigator;
-
-    if (supportsVibrate) {
-        function myFunction() {
-            var time = document.getElementById("seconds").value;
-            navigator.vibrate(time * 1000);
-        }
-    }
 }
 
 function loadWord() {
