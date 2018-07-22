@@ -6,12 +6,12 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
-var request = require('request');
-var sqlite = require('sqlite3').verbose();
+// var request = require('request');
+// var sqlite = require('sqlite3').verbose();
 var config = yml.sync('config.yml');
 var port = process.env.PORT || config["server"]["port"];
-var db; 
-let find_json = [];
+// var db; 
+// let find_json = [];
 var config = yml.sync('config.yml');
 
 //Websocket
@@ -158,4 +158,4 @@ router.post('/delete', async function (req, res) {
 // ==============================
 app.use('/', router);
 app.listen(port, config["server"]["ip"]);
-console.log("Webserver started on port  " + port + "! Go and check it out!");
+console.log("Webserver listening on port  " + port + "!");
