@@ -36,7 +36,7 @@ def callback(ch, method, properties, body):
         english = result[1]
         print(f' [x] Worker found german: {german} english {english}')
         ws = create_connection("ws://localhost:8082")
-        ws.send(f'{german}, {english}')
+        ws.send(f'german: {german} english {english}')
         print(" [x] Sent Message to Websocket")
         response =  ws.recv()
         print(" [x] Received '%s'" % response)
@@ -44,12 +44,14 @@ def callback(ch, method, properties, body):
         print(" [x] Connection to Websocket closed")
     else:
         print(f" [x] Worker couldn't find {search_word}")
+        ws = create_connection("ws://localhost:8082")
+        ws.send(f"couldn't find {search_word} in db")
+        print(" [x] Sent Message to Websocket")
+        response =  ws.recv()
+        print(" [x] Received '%s'" % response)
+        ws.close()
+        print(" [x] Connection to Websocket closed")
 
-	# hint: https://stackoverflow.com/questions/31529421/weird-output-value-bvalue-r-n-python-serial-read
-    # print(" [x] Received %r" % body.decode('utf-8'))
-
-# receive / "consume" message => "consumer"
-# take care (!) -> no_ack -> worker die -> message not handled correctly -> message will be lost
 channel.basic_consume(callback,
                       queue='findQueue',
                       no_ack=True)
