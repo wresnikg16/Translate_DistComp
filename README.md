@@ -1,8 +1,8 @@
 # How to get the project running
 
-- First of all, check in your CLI if and which version of node.js you have installed:
-    ```where node```
-    ```node --version```
+- First of all, check in your CLI if and which version of node.js you have installed:  
+    ```where node```  
+    ```node --version```  
     If your version is below v7.6 you need to update it.  
     Either use the latest version from [node.js](https://nodejs.org/en/download/) or follow these steps: [update node version - on Windows](./documentation/updateNodeVersion.md). 
 - Download and install [RabbitMQ](https://www.rabbitmq.com/download.html) and the necessary [Plugins](https://www.rabbitmq.com/management.html). 
